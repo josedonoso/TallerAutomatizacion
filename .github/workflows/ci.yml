@@ -25,16 +25,20 @@ jobs:
     - name: 2. Ejecutar Tests (Unitarios + BDD) y Compilar 
       run: mvn clean install
 
-    # Subir reporte de BDD (Para Tarea 39)
+    # Subir reporte de BDD
     - name: 3. Subir Reporte BDD (Cucumber)
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: reporte-bdd-cucumber
-        path: target/cucumber-reports/cucumber.json
+        
+        path: target/cucumber-reports/cucumber.json 
         
     # Subir reporte de Unitarios
     - name: 4. Subir Reporte de Tests Unitarios 
       uses: actions/upload-artifact@v4
-      if: always() 
-      path: target/surefire-reports
+      if: always()
+      
+      with:
+        name: reporte-surefire-tests
+        path: target/surefire-reports
