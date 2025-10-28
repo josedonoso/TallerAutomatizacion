@@ -1,0 +1,37 @@
+name: Taller CI - Pipeline Principal
+
+# El pipeline se ejecutará automáticamente en cada push a la rama 'main' 
+# y en cada Pull Request que se abra contra 'main' (Tarea 24).
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 1. Checkout del Código
+      uses: actions/checkout@v4
+    
+    - name: 2. Configurar Entorno Java 17
+      # en mi caso tengo Java 21, consistente con tu pom.xml.
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: 'maven'
+        
+    - name: 3. Ejecutar Maven: Compilación y Tests (Tarea 24)
+      # El comando que ejecuta las pruebas unitarias (T21)
+      run: mvn clean install
+      
+    - name: 4. Subir Reporte de Tests Unitarios (Tarea 25)
+      # Sube la carpeta generada por el maven-surefire-plugin (Reporte Navegable)
+      uses: actions/upload-artifact@v4
+      if: always() # Subir el reporte incluso si los tests fallan.
+      with:
+        name: reporte-surefire-tests
+        path: target/surefire-reports
