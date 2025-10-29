@@ -31,7 +31,7 @@ jobs:
       if: always()
       with:
         name: reporte-bdd-html-navegable
-        path: target/cucumber-html-reports # Sube la carpeta generada por el plugin
+        path: target/cucumber-html-reports
         
     # Subir reporte de Unitarios
     - name: 4. Subir Reporte de Tests Unitarios 
@@ -39,4 +39,4 @@ jobs:
       if: always()
       with:
         name: reporte-surefire-tests
-        path: target/surefire-reports # Sube la carpeta de reportes JUnit/Surefire
+        path: target/surefire-reports
