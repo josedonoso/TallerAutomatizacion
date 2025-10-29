@@ -53,9 +53,6 @@
                         <exclude>**/*Test.java</exclude>
                     </excludes>
                     <useModulePath>false</useModulePath>
-                    <systemPropertyVariables>
-                        <cucumber.plugin>json:target/cucumber-reports/cucumber.json</cucumber.plugin>
-                    </systemPropertyVariables>
                     </configuration>
                 <executions>
                     <execution>
@@ -81,7 +78,7 @@
                         <configuration>
                             <projectName>Taller CI Reporte BDD</projectName>
                             <jsonFiles>
-                                <param>target/cucumber-reports/cucumber.json</param>
+                                <param>target/cucumber-reports/*.json</param>
                             </jsonFiles>
                             <outputDirectory>target/cucumber-html-reports</outputDirectory>
                             <checkBuildResult>false</checkBuildResult>
