@@ -40,3 +40,35 @@ jobs:
       with:
         name: reporte-surefire-tests
         path: target/surefire-reports
+        
+        
+  # Simulación de un archivo de configuración de CI (ejemplo basado en GitLab CI o GitHub Actions)
+
+job_name: run_tests_and_performance
+  stage: test
+  script:
+    # --- 1. Ejecución de Pruebas ---
+    - mvn clean verify  # Ejecuta tests funcionales/BDD y genera reportes XML/JSON.
+    - jmeter -n -t login_test.jmx -l results.csv # Ejecuta performance y genera CSV.
+    
+    # --- 2. Transmisión de Métricas (El indicador de logro 7) ---
+    - echo "Iniciando transmisión de métricas a Prometheus..."
+    
+    # Simulación de extracción y envío de la Tasa de Éxito Funcional (1.00 = 100%)
+    - TASA_EXITO=1.00
+    - echo "functional_test_success_rate $TASA_EXITO" | \
+      curl --data-binary @- http://prometheus-gateway.midominio.com/metrics/job/BDD
+      
+    # Simulación de extracción y envío de métricas de Performance (usando tus resultados)
+    # Latencia promedio de 498 ms
+    - LATENCIA=498
+    - echo "performance_latency_avg_ms $LATENCIA" | \
+      curl --data-binary @- http://prometheus-gateway.midominio.com/metrics/job/Performance
+
+    # Tasa de Errores de 0.00%
+    - ERROR_RATE=0.00
+    - echo "performance_error_rate $ERROR_RATE" | \
+      curl --data-binary @- http://prometheus-gateway.midominio.com/metrics/job/Performance
+      
+    - echo "Transmisión de métricas completada."
+
