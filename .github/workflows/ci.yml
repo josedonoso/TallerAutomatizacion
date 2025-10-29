@@ -21,25 +21,22 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
 
-    # Ejecutar pruebas y compilar
-    # Esto ejecuta los tests unitarios (Surefire), los BDD (Failsafe)   
+    # Ejecutar pruebas, generar reportes JSON y HTML
     - name: 2. Ejecutar Tests (Unitarios + BDD) y Compilar 
       run: mvn clean install
 
     # Subir reporte de BDD 
-    # Sube la carpeta HTML generada por el plugin
     - name: 3. Subir Reporte BDD (Cucumber HTML Navegable)
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: reporte-bdd-html-navegable
-        path: target/cucumber-html-reports 
+        path: target/cucumber-html-reports # Sube la carpeta generada por el plugin
         
-    # Subir reporte de Unitarios 
-    # Sube la carpeta de reportes de Surefire
+    # Subir reporte de Unitarios
     - name: 4. Subir Reporte de Tests Unitarios 
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: reporte-surefire-tests
-        path: target/surefire-reports
+        path: target/surefire-reports # Sube la carpeta de reportes JUnit/Surefire
