@@ -53,6 +53,9 @@
                         <exclude>**/*Test.java</exclude>
                     </excludes>
                     <useModulePath>false</useModulePath>
+                    <systemPropertyVariables>
+                        <cucumber.plugin>json:target/cucumber-reports/cucumber.json</cucumber.plugin>
+                    </systemPropertyVariables>
                     </configuration>
                 <executions>
                     <execution>
