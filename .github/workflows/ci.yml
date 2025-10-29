@@ -23,7 +23,7 @@ jobs:
 
     # ¡FIX DEFINITIVO! Forzamos la propiedad JSON en la línea de comando
     - name: 2. Ejecutar Tests (Unitarios + BDD) y Compilar 
-      run: mvn clean install -Dcucumber.plugin="json:target/cucumber-reports/cucumber.json"
+      run: mvn clean install
 
     # Subir reporte de BDD (Para Tarea 39)
     - name: 3. Subir Reporte BDD (Cucumber HTML Navegable)

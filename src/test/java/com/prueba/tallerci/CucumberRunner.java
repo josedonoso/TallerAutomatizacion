@@ -6,16 +6,11 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        // Le dice a Cucumber dónde encontrar los archivos .feature
-        features = "src/test/resources", 
-        // Le dice dónde encontrar las clases de Step Definitions
-        glue = "com.prueba.tallerci.stepdefinitions", 
-        // Genera un reporte HTML navegable
+        features = "src/test/resources",
+        glue = "com.prueba.tallerci.stepdefinitions",
+        // ESTA LÍNEA DEBE SER CORRECTA:
         plugin = {"pretty", "json:target/cucumber-reports/cucumber.json"}
-        // Muestra el nombre real de los escenarios en lugar del nombre del método
-        
 )
-
 public class CucumberRunner {
-    
+    // Clase vacía
 }
