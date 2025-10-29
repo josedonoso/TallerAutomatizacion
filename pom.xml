@@ -38,7 +38,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
-
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
@@ -46,7 +45,6 @@
                         <version>${surefire.plugin.version}</version>
                     </dependency>
                 </dependencies>
-
                 <configuration>
                     <includes>
                         <include>**/*Runner.java</include>
@@ -59,7 +57,6 @@
                         <cucumber.plugin>json:target/cucumber-reports/cucumber.json</cucumber.plugin>
                     </systemPropertyVariables>
                 </configuration>
-
                 <executions>
                     <execution>
                         <goals>
@@ -69,6 +66,29 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.7.7</version> 
+                <executions>
+                    <execution>
+                        <id>execute-reporting</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Taller CI Reporte BDD</projectName>
+                            <jsonFiles>
+                                <param>target/cucumber-reports/cucumber.json</param>
+                            </jsonFiles>
+                            <outputDirectory>target/cucumber-html-reports</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
         </plugins>
     </build>
 
