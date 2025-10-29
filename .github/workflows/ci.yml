@@ -21,19 +21,19 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
 
-    # Ejecutar pruebas, generar reportes JSON y HTML
+    # ¡FIX DEFINITIVO! Forzamos la propiedad JSON en la línea de comando
     - name: 2. Ejecutar Tests (Unitarios + BDD) y Compilar 
-      run: mvn clean install
+      run: mvn clean install -Dcucumber.plugin="json:target/cucumber-reports/cucumber.json"
 
-    # Subir reporte de BDD 
+    # Subir reporte de BDD (Para Tarea 39)
     - name: 3. Subir Reporte BDD (Cucumber HTML Navegable)
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: reporte-bdd-html-navegable
-        path: target/cucumber-html-reports
+        path: target/cucumber-html-reports 
         
-    # Subir reporte de Unitarios
+    # Subir reporte de Unitarios 
     - name: 4. Subir Reporte de Tests Unitarios 
       uses: actions/upload-artifact@v4
       if: always()
